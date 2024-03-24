@@ -9,29 +9,37 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html', // Path to your index.html template
-            filename: 'index.html', // Output filename (in the dist directory)
+            template: './src/index.html',
+            filename: 'index.html',
         }),
     ],
     module: {
         rules: [
             {
-                test: /\.js$/, // Apply this rule to files ending in .js
-                exclude: /node_modules/, // Exclude files in the node_modules directory
+                test: /\.js$/,
+                exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader', // Use Babel loader for transpiling ES6+
+                    loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env'] // Presets for Babel
+                        presets: ['@babel/preset-env']
                     }
                 }
             },
             {
-                test: /\.css$/, // Apply this rule to files ending in .css
-                use: ['style-loader', 'css-loader'], // Use these loaders for CSS files
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.(png|svg|jpg|gif)$/, // Apply this rule to image files
-                use: ['file-loader'], // Use file-loader for images
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]', // Keep original file name and extension
+                            outputPath: 'images/', // Output path within the 'dist' directory
+                        },
+                    },
+                ],
             },
         ],
     },
