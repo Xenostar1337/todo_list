@@ -1,10 +1,9 @@
-export function home() {
-    document.body.style.height = "95vh"; 
+export function homeLogin() {
+    document.body.style.height = "95vh";     
     logo();
     header();
     buttons();    
-    contents();   
-    
+    contents();  
 };
 
 function logo() {
@@ -62,16 +61,13 @@ function buttons() {
 
 function contents() {
     const parent = document.getElementById("content");
-
     const div1 = document.createElement("div");
     div1.textContent = "All your tasks";
     div1.style.fontSize = "60px";
     div1.style.marginTop = "5%";
-
     const div2 = document.createElement("div");
     div2.textContent = "Organized. Simply.";
     div2.style.fontSize = "40px";
-
     const button = document.createElement("button");
     button.textContent = "Sign up";
     button.style.fontSize = "36px";
@@ -82,24 +78,20 @@ function contents() {
     button.style.marginBottom = "auto";
     button.style.marginTop = "25px";
     button.id = "signup";
-
     const imge = document.createElement("img");
     imge.src = "./images/sticknotes.jpg"
     imge.style.width = "100%";
     imge.style.marginTop = "0%";
-    imge.id = "stickies";
-    
+    imge.id = "stickies";    
     parent.style.display = "flex";
     parent.style.flexDirection = "column";
     parent.style.alignItems = "center";
     parent.style.justifyContent = "center";
     parent.style.marginBottom = "auto";
-
     document.body.style.display = "flex";
     document.body.style.flexDirection = "column";
     document.body.style.alignItems = "center";
     document.body.style.justifyContent = "center";
-
     parent.appendChild(div1);
     parent.appendChild(div2);
     parent.appendChild(button);

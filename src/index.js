@@ -1,33 +1,66 @@
 import './images/sticknotes.jpg'
 import './images/logo.png';
-import { home } from './home.js';
-import { clear } from './clear.js';
+import { homeLogin } from './modules/newHome.js';
+import { clear } from './modules/clear.js';
+import { feature } from './modules/features.js';
+import { support } from './modules/support.js';
+import { signup } from './modules/signup.js';
+import { loggedIn } from './modules/loggedIn.js';
+import { log } from './modules/logOut.js';
+const button2 = document.getElementById("features");
+const button3 = document.getElementById("support");
+const button1 = document.getElementById("home");
+const loginB = document.getElementById("login");
+let amLoggedIn = false;
 clear();
-home();
+homeLogin();
+signUpListen();
 
-    const feat = document.getElementById("features");
-    const supp = document.getElementById("support");
-    const homes = document.getElementById("home");
-    const login = document.getElementById("login");
-    const signup = document.getElementById("signup");
+function signUpListen() {
+    const signupB = document.getElementById("signup");
+    signupB.addEventListener('click', function() {
+        clear();
+ }); 
+}
 
-feat.addEventListener('click', function() {
-    console.log("worked");
+button1.addEventListener('click', function() {
+    if (amLoggedIn == false) {
+        clear();
+        homeLogin();
+        signUpListen();    
+    } else {
+
+    }
 });
 
-supp.addEventListener('click', function() {
-    console.log("worked");
+button2.addEventListener('click', function() {
+    if (amLoggedIn == false) {
+        clear();
+        feature();    
+    } else {
+        
+    }
+   
 });
 
-homes.addEventListener('click', function() {
-    clear();
-    home();
+button3.addEventListener('click', function() {
+    if (amLoggedIn == false) {
+        clear();
+        support();
+    } else {
+        
+    }
 });
 
-login.addEventListener('click', function() {
-    clear();
-});
-
-signup.addEventListener('click', function() {
-console.log("worked");
+loginB.addEventListener('click', function() {
+    if (amLoggedIn == false) {
+        clear();
+        loggedIn("Billy");
+        amLoggedIn = true;    
+    } else {
+        const confirmed = window.confirm('Are you sure you want to logout?');
+        if (confirmed) {
+            log();    
+        }        
+    }
 });
