@@ -5,7 +5,6 @@ import { clear } from './modules/clear.js';
 import { feature } from './modules/features.js';
 import { support } from './modules/support.js';
 import { signUp } from './modules/signup.js';
-import { loggedIn } from './modules/loggedIn.js';
 import { log } from './modules/logOut.js';
 import { userHome } from './modules/userHome.js';
 
@@ -36,11 +35,11 @@ function submitInfo() {
         emailInput = document.getElementById("email").value;
         aliasInput = document.getElementById("alias").value;
         passwordInput = document.getElementById("password").value;
-        //add some validation
-        loggedIn(aliasInput);
-        amLoggedIn = true;
-        clear();
-        userHome();
+        if (userNameInput != "" && emailInput !== "" && aliasInput !== "" && passwordInput !== "") {
+            amLoggedIn = true;
+            clear();
+            userHome(aliasInput);
+        }
     });
 }
 
@@ -50,7 +49,6 @@ button1.addEventListener('click', function() {
         homeLogin();
         signUpListen();    
     } else {
-
     }
 });
 
@@ -58,10 +56,8 @@ button2.addEventListener('click', function() {
     if (amLoggedIn == false) {
         clear();
         feature();    
-    } else {
-        
-    }
-   
+    } else {        
+    }   
 });
 
 button3.addEventListener('click', function() {
@@ -69,14 +65,14 @@ button3.addEventListener('click', function() {
         clear();
         support();
     } else {
-        
     }
 });
 
 loginB.addEventListener('click', function() {
     if (amLoggedIn == false) {
         clear();
-            
+        amLoggedIn = true;
+        userHome("Xenostar");  
     } else {
         const confirmed = window.confirm('Are you sure you want to logout?');
         if (confirmed) {
