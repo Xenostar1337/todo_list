@@ -27,8 +27,18 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                use: [
+                    'style-loader', // Inject CSS styles into the DOM
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].css', // Keep original file name and extension
+                            outputPath: '', // Output path within the 'dist' directory
+                        },
+                    },
+                ],
             },
+            
             {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [

@@ -11,6 +11,7 @@ export function signUp() {
         signupForm.style.alignContent = "center";
         signupForm.style.border = "2px solid green";
         signupForm.style.padding = "4px";        
+        signupForm.style.marginTop = "20px";
     
         const nameLabel = document.createElement('label');
         nameLabel.textContent = "Name:";

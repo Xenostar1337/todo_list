@@ -1,5 +1,5 @@
 export function homeLogin() {
-    document.body.style.height = "95vh";     
+    //adds divs and styles new home   
     logo();
     header();
     buttons();    
@@ -60,38 +60,39 @@ function buttons() {
 
 
 function contents() {
-    const parent = document.getElementById("content");
+    const gParent = document.getElementById("content");
+    const parent = document.createElement("div");
     const div1 = document.createElement("div");
+    parent.style.alignSelf = "center";
+    parent.style.justifySelf = "center";
+    parent.style.display = "grid";
+    parent.style.justifyContent = "center";
+    parent.style.width = "400px";
     div1.textContent = "All your tasks";
     div1.style.fontSize = "60px";
     div1.style.marginTop = "5%";
+    div1.style.marginLeft = "auto";
+    div1.style.marginRight = "auto";
+    div1.style.justifySelf = "center";
     const div2 = document.createElement("div");
     div2.textContent = "Organized. Simply.";
     div2.style.fontSize = "40px";
+    div2.style.marginLeft = "auto";
+    div2.style.marginRight = "auto";
+    div2.style.justifySelf = "center";
     const button = document.createElement("button");
     button.textContent = "Sign up";
-    button.style.fontSize = "36px";
-    button.style.borderRadius = "50%"; 
-    button.style.padding = "20px";
-    button.style.backgroundColor = "orange"; 
-    button.style.border = "5px solid black"; 
-    button.style.marginBottom = "auto";
-    button.style.marginTop = "25px";
     button.id = "signup";
     const imge = document.createElement("img");
     imge.src = "./images/sticknotes.jpg"
     imge.style.width = "100%";
     imge.style.marginTop = "0%";
-    imge.id = "stickies";    
-    parent.style.display = "flex";
-    parent.style.flexDirection = "column";
-    parent.style.alignItems = "center";
-    parent.style.justifyContent = "center";
-    parent.style.marginBottom = "auto";
+    imge.id = "stickies";       
     document.body.style.display = "flex";
     document.body.style.flexDirection = "column";
     document.body.style.alignItems = "center";
     document.body.style.justifyContent = "center";
+    gParent.appendChild(parent);
     parent.appendChild(div1);
     parent.appendChild(div2);
     parent.appendChild(button);
