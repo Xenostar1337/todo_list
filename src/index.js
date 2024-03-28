@@ -11,6 +11,7 @@ import { userHome } from './modules/userHome.js';
 import { newUser } from './modules/newUser.js';
 import { populate } from './modules/projectPop.js';
 import { newProject } from './modules/newProject.js';
+import { save } from './modules/saveState.js';
 
 const button2 = document.getElementById("features");
 const button3 = document.getElementById("support");
@@ -55,7 +56,7 @@ function submitInfo() {
             projectCounter++;
             userHome(aliasInput);  
             populate(projectArray);        
-            addListeners();             
+            addListeners();  
         }
     });
 }
@@ -65,11 +66,15 @@ function addListeners() {
     let divs = content.querySelectorAll("div");
     function addButtonEventHandlers(div) {// Get all buttons inside the div
         let buttons = div.querySelectorAll("button");
-        buttons.forEach(button => {// Add event listener to each button
-            button.addEventListener("click", function() {
-                console.log("Button id that was pressed:", button.id);
-                //clicked(button.id); click should figure out what the button wants to do. and do it.
-            });
+        buttons.forEach(button => { // Check if the event listener is already attached to the button
+           if (!button.hasEventListener) {
+                button.addEventListener("click", function() {
+                    //console.log("Button:", button);
+                    projectArray = save();
+                    
+                });        
+                button.hasEventListener = true;
+            }
         });
     }
     divs.forEach(div => {// Iterate over each div and add event handlers to buttons
@@ -83,9 +88,9 @@ button1.addEventListener('click', function() {
         homeLogin();
         signUpListen();    
     } else {
-        console.log("clicked");
-        projectArray.push(newProject("Project " + projectCounter,"low",[["Task", false]]));
-        projectCounter++;
+        projectArray = save();
+        projectArray.push(newProject("Project " + projectCounter,"low",[["Task", true]]));
+        projectCounter++;       
         populate(projectArray);
         addListeners();
     }
@@ -115,7 +120,6 @@ loginB.addEventListener('click', function() {
         //axe for username and password
         //check username and password to be true on file
         let user = newUser("adam", "j@j.com", "Gerome", "1234");
-
         projectArray.push(newProject("Project " + projectCounter,"low",[["Task", true]]));
         projectCounter++;
         userHome("Gerome");  

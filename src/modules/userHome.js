@@ -1,5 +1,5 @@
 export function userHome(aliasInput) {
-    //styles header and content area
+    //styles header
     const header = document.getElementById("header");
     const loginB = document.getElementById("login");
     const button2 = document.getElementById("features");
