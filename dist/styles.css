@@ -14,13 +14,19 @@ body {
     height: auto; 
 }
 
+
+
+.task-container {
+    margin: 0px;
+}
+
 .task-input {
     font-size: 26px;
     background-color: transparent;
     border: none;
     width: fit-content;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-bottom: 4px;
 }
 
 .task-checkbox {

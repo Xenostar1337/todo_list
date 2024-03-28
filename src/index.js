@@ -69,7 +69,7 @@ function addListeners() {
         buttons.forEach(button => { // Check if the event listener is already attached to the button
            if (!button.hasEventListener) {
                 button.addEventListener("click", function() {
-                    //console.log("Button:", button);
+                    clicker(button);
                     projectArray = save();
                     
                 });        
@@ -89,7 +89,7 @@ button1.addEventListener('click', function() {
         signUpListen();    
     } else {
         projectArray = save();
-        projectArray.push(newProject("Project " + projectCounter,"low",[["Task", true]]));
+        projectArray.push(newProject("Project " + projectCounter,"low",[["Task", false]]));
         projectCounter++;       
         populate(projectArray);
         addListeners();
@@ -120,7 +120,7 @@ loginB.addEventListener('click', function() {
         //axe for username and password
         //check username and password to be true on file
         let user = newUser("adam", "j@j.com", "Gerome", "1234");
-        projectArray.push(newProject("Project " + projectCounter,"low",[["Task", true]]));
+        projectArray.push(newProject("Project " + projectCounter,"low",[["Task", false]]));
         projectCounter++;
         userHome("Gerome");  
         populate(projectArray);        
@@ -134,6 +134,30 @@ loginB.addEventListener('click', function() {
         }        
     }
 });
+
+function clicker(button) {
+    let project = button.parentNode.parentNode;
+    let taskArea = button.parentElement.parentElement.querySelector(".task-container");
+    console.log(button.id);
+    if (button.id == "p1") {//new task
+            let taskContainer = document.createElement("div");
+            taskContainer.classList.add("task-container");
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.classList.add("task-checkbox");
+            checkbox.checked = false; 
+            taskContainer.appendChild(checkbox);
+            let editableLabel = document.createElement("input");
+            editableLabel.type = "text";
+            editableLabel.value = "new task";
+            editableLabel.classList.add("task-input");
+            taskContainer.appendChild(editableLabel);
+            taskArea.appendChild(taskContainer);
+    }
+
+
+    
+}
 
 clear();
 homeLogin();
