@@ -58,7 +58,6 @@ function buttons() {
     nav.style.justifyContent = "space-around";    
 }
 
-
 function contents() {
     const gParent = document.getElementById("content");
     const parent = document.createElement("div");

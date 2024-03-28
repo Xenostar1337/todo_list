@@ -12,6 +12,7 @@ import { newUser } from './modules/newUser.js';
 import { populate } from './modules/projectPop.js';
 import { newProject } from './modules/newProject.js';
 import { save } from './modules/saveState.js';
+import { clicker } from './modules/clicker.js'
 
 const button2 = document.getElementById("features");
 const button3 = document.getElementById("support");
@@ -26,7 +27,6 @@ let amLoggedIn = false;
 let userArray = []; 
 let projectArray = [];
 let taskArray = [];
-let projectCounter = 1;
 
 function signUpListen() {
     const signupB = document.getElementById("signup");
@@ -52,8 +52,7 @@ function submitInfo() {
             let user = newUser(userNameInput, emailInput, aliasInput, passwordInput);
             //userArray.push(user);  //have more than 1 user
             userArray = user        //one user only, less work.
-            projectArray.push(newProject("Project " + projectCounter,"low",[["Task", false]]));
-            projectCounter++;
+            projectArray.push(newProject("New Project","Priority low",[["New Task", false]]));
             userHome(aliasInput);  
             populate(projectArray);        
             addListeners();  
@@ -64,20 +63,24 @@ function submitInfo() {
 function addListeners() {
     let content = document.getElementById("content");
     let divs = content.querySelectorAll("div");
-    function addButtonEventHandlers(div) {// Get all buttons inside the div
+    function addButtonEventHandlers(div) {
         let buttons = div.querySelectorAll("button");
-        buttons.forEach(button => { // Check if the event listener is already attached to the button
+        buttons.forEach(button => { 
            if (!button.hasEventListener) {
                 button.addEventListener("click", function() {
-                    clicker(button);
-                    projectArray = save();
-                    
+                   let repop = clicker(button);
+                   console.log(button.id);
+                    if (repop === "repop") {
+                        projectArray = save();
+                        populate(projectArray);
+                        addListeners();
+                    }
                 });        
                 button.hasEventListener = true;
             }
         });
     }
-    divs.forEach(div => {// Iterate over each div and add event handlers to buttons
+    divs.forEach(div => {
         addButtonEventHandlers(div);
     });
 }
@@ -89,8 +92,7 @@ button1.addEventListener('click', function() {
         signUpListen();    
     } else {
         projectArray = save();
-        projectArray.push(newProject("Project " + projectCounter,"low",[["Task", false]]));
-        projectCounter++;       
+        projectArray.push(newProject("New Project","Priority low",[["New Task", false]]));       
         populate(projectArray);
         addListeners();
     }
@@ -120,8 +122,7 @@ loginB.addEventListener('click', function() {
         //axe for username and password
         //check username and password to be true on file
         let user = newUser("adam", "j@j.com", "Gerome", "1234");
-        projectArray.push(newProject("Project " + projectCounter,"low",[["Task", false]]));
-        projectCounter++;
+        projectArray.push(newProject("New Project ","Priority low",[["New Task", false]]));
         userHome("Gerome");  
         populate(projectArray);        
         addListeners();    
@@ -134,30 +135,6 @@ loginB.addEventListener('click', function() {
         }        
     }
 });
-
-function clicker(button) {
-    let project = button.parentNode.parentNode;
-    let taskArea = button.parentElement.parentElement.querySelector(".task-container");
-    console.log(button.id);
-    if (button.id == "p1") {//new task
-            let taskContainer = document.createElement("div");
-            taskContainer.classList.add("task-container");
-            let checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.classList.add("task-checkbox");
-            checkbox.checked = false; 
-            taskContainer.appendChild(checkbox);
-            let editableLabel = document.createElement("input");
-            editableLabel.type = "text";
-            editableLabel.value = "new task";
-            editableLabel.classList.add("task-input");
-            taskContainer.appendChild(editableLabel);
-            taskArea.appendChild(taskContainer);
-    }
-
-
-    
-}
 
 clear();
 homeLogin();

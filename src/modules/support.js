@@ -13,6 +13,7 @@ export function support() {
         liElement.style.fontSize = "32px";
         ulElement.appendChild(liElement);
     });
+    
     divElement.appendChild(ulElement);
     parent.appendChild(divElement);
     const imge = document.createElement("img");
