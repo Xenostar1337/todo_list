@@ -1,5 +1,6 @@
 body {
     width: 100vw;
+    font-family: Verdana, sans-serif;
 }
 .project {
     display: flex;
@@ -60,4 +61,21 @@ width: 22px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;    
+}
+
+.dueLabel {
+    background-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+}
+
+.dueDate {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
+    margin-bottom: 10px;
 }
